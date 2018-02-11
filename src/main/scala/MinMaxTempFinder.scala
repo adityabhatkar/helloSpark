@@ -11,7 +11,7 @@ object MinMaxTempFinder {
     val minTemps = tempData.filter(temps => temps._2._1.equalsIgnoreCase("TMIN")).map(t => (t._1, t._2._2))
     val maxTemps = tempData.filter(temps => temps._2._1.equalsIgnoreCase("TMAX")).map(t => (t._1, t._2._2))
     val minTempByStations = minTemps.reduceByKey((temp1, temp2) => math.min(temp1, temp2)).collect()
-    val maxTempByStations = minTemps.reduceByKey((temp1, temp2) => math.max(temp1, temp2)).collect()
+    val maxTempByStations = maxTemps.reduceByKey((temp1, temp2) => math.max(temp1, temp2)).collect()
 
     for(stationTemp <- minTempByStations){
       println("Min temps for station " + stationTemp._1 + " was " + stationTemp._2)
